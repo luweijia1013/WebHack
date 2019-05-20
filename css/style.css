@@ -1,0 +1,59 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    background-image: url('../Images/bg1.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: "Times New Roman";
+}
+h1 {
+    font-size: 50px;
+    margin-top: 20px;
+    color: white;
+}
+h3 {
+    color: white;
+    margin-bottom: 10px;
+}
+
+.form-control{
+    background: rgba(0,0,0,0.6);
+    border: 0px;
+    border-radius: 0px;
+    margin-top: 10px;
+    height: 45px;
+    font-size: 23px;
+    color: white;
+}
+.btn-danger {
+    margin-top: 20px;
+    width: 458px;
+    font-size: 23px;
+    background: #a5e0a8;
+    border:0px;
+    border-radius: 0px;
+}
+
+p {
+    font-size: 19px;
+    color: white;
+    margin-top: 90px;
+}
+
+.btn-info{
+    width: 130px;
+    margin-top: 20px;
+    margin-left: 150px;
+    border-radius: 100px;
+    margin-bottom: 25px;
+}
+
+.col-md-5{
+    background: transparent;
+    box-shadow: -1px 1px 50px 10px black;
+    margin-top: 60px;
+    border-radius: 10px 0px 20px 10px;
+}

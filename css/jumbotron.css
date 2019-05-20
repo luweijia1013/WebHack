@@ -1,0 +1,65 @@
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  background-image: url('../Images/bg2.jpg');
+  background-size: cover;
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+#bg {
+  position: relative;
+  top: 0;
+  bottom: 0;
+  height: 100vh;
+  z-index: -10;
+}
+
+#bg-overlay {
+  position: absolute;
+  background-color: rgba(0,0,0,0.5);
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -5;
+}
+
+.jumbotron {
+  background: rgba(0,0,0,0.5);
+  position: relative;
+  margin-top: 350px;
+}
+
+h1{
+  color: white;
+  font-size: 45px;
+  margin: auto;
+  bottom: 100px;
+}
+
+.btn-primary {
+  margin-top: 20px;
+  width: 150px;
+  font-size: 19px;
+  background: #1ab188;
+  border:0px;
+  border-radius: 2px;
+}
+
+h2{
+  color: white;
+}
+
+p{
+  color: white;
+  margin-bottom: 10px;
+}
+
+.col-md-4 {
+  background: rgba(0,0,0,0.5);
+  box-shadow: -1px 1px 50px 10px black;
+  margin-top: 60px;
+  border-radius: 10px 0px 20px 10px;
+}
+
+
