@@ -4,7 +4,37 @@
 let HTTP = require('http');
 let FS = require('fs').promises;
 let OK = 200, NotFound = 404, BadType = 415;
+let sqlite3 = require('sqlite3');
+let users_info_data = require('./usersInfoData.js');
 start(8080);
+
+
+executeUsersinfo();
+
+
+
+//execution of usersinfo database
+function executeUsersinfo(){
+
+    let database_user = users_info_data.openUsersInfoDatabase();
+    // users_info_data.insertUsersBasic(-1,'\'lwjabcd\'','\'a987654321\'','\'42@qq.com\'');
+
+
+    // TODO:create&insert can't be done in one time -BUG
+    // users_info_data.createTable('test2', attributes, notes);
+    // users_info_data.insertGeneral('test2',values);
+    users_info_data.updateUsersBasic(1,'','jy@qq.com')
+
+    //TODO:cant get return value -BUG asynchronous problem - promise, callback function
+    users_info_data.getAllUsersBasic();
+    // console.log('****' + result);
+
+
+    users_info_data.closeUsersInfoDatabase();
+
+}
+
+
 
 // Provide a service to localhost only.
 function start(port) {
