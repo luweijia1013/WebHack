@@ -5,6 +5,7 @@ body {
 }
 
 #bg-overlay {
+  background-image: url('../Images/bg2.jpg');
   position: fixed;
   top: 0;
   left: 0;
@@ -47,12 +48,12 @@ p{
   margin-bottom: 10px;
 }
 
-.col-md-4{
-  background: rgba(0,0,0,0.5);
-  box-shadow: -1px 1px 50px 10px black;
-  margin-top: 60px;
-  border-radius: 10px 0px 20px 10px;
-}
+/*.col-md-4{*/
+/*  background: rgba(0,0,0,0.5);*/
+/*  box-shadow: -1px 1px 50px 10px black;*/
+/*  margin-top: 60px;*/
+/*  border-radius: 10px 0px 20px 10px;*/
+/*}*/
 
 
 .carousel {

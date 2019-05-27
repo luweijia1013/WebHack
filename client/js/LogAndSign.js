@@ -1,6 +1,13 @@
 'use strict';
 
+let http = require('http');
+
 let x = "Please enter username and password";
+let querystring = require('querystring');
+let HOST = 'localhost';
+let PORT = 8080;
+fnLogin();
+
 function tips() {
     document.getElementById("tips").innerHTML = x;
 }
@@ -23,54 +30,42 @@ function removeClass(obj, cls) {
 }
 
 function fnLogin() {
-    let uName = $('#name').val();
+    let uName = document.getElementById("id_name").value;
     console.info(uName);
-    let uPass = $('#password').val();
+    let uPass = document.getElementById("id_password").value;
     console.info(uPass);
     if (uName === "" || uName === null) {
-        addClass(ele.uName, "borderRed");
-        x = "Username can't be empty";
-        document.getElementById("tips").style.display = "inherit";
+        alert("Username can't be empty");
         return false;
     }else if (uPass === "" || uPass === null) {
-        addClass(ele.uPass, "borderRed");
-        x = "Password can't be empty";
-        document.getElementById("tips").style.display = "inherit";
+        alert("Password can't be empty");
         return false;
-    }else if (!checkLogin()){
-        addClass(ele.name, "borderRed");
-        addClass(ele.pwd, "borderRed");
-        x = "Your username or password is wrong, please enter correct username or password";
-        document.getElementById("tips").style.display = "inherit";
+    }else if (checkLogin() === '0') {
+        alert("Sorry, you entered wrong username or password");
         return false;
-    }else {
+    }else if(checkLogin() === '1') {
+        window.location.href = '../client/index.html';
         return true;
     }
 }
 
 function checkLogin() {
-    let name = $('#name').attr("value");
-    let pwd = $('#password').attr("value");
-    let datas = new Object();
-    $.ajax({
-        type: "post",
-        contentType: "application/string",
-        dataType: "json",
-        async: false,
-        url: "${base}/Login.htm?name=" + name + "&pwd=" + pwd,
-        success: function (data) {
-            datas= eval("(" + data + ")");
-        }
-    });
-    if (datas.result === "nameFalse" || datas.result === "pwdFalse") {
-        addClass(ele.name, "borderRed");
-        addClass(ele.pwd, "borderRed");
-        x = "Your username or password is wrong, please enter correct username or password";
-        document.getElementById("tips").style.display = "inherit";
-        return false;
-    }else {
-        return true;
-    }
+    let uName = document.getElementById("id_name").value;
+    console.info(uName);
+    let uPass = document.getElementById("id_password").value;
+    console.info(uPass);
+    http.get({
+            'host': HOST,
+            path: '/?tag=login&username=' + uName + '&password=' + uPass,
+            port: 8080
+        }, function (res) {
+            res.setEncoding('utf-8');
+            res.on('data', function (data) {
+                console.log(data);
+            })
+        });
+        return data;
+
 }
 
 function fnRegister() {
@@ -85,26 +80,28 @@ function fnRegister() {
 }
 
 function checkName() {
-    let uName = document.getElementById("name").value;
+    let uName = document.getElementById("id_name").value;
+    console.info(uName);
+
     if (uName === "" || uName === null) {
-        addClass(ele.uName, "borderRed");
-        x = "Username can't be empty";
-        document.getElementById("tips").style.display = "inherit";
+        alert("Username can't be empty");
         return false;
     }
     if (uName.length < 3 || uName.length > 15) {
-        addClass(ele.uName, "borderRed");
-        x = "The length of username must be between 3 and 15";
-        document.getElementById("tips").style.display = "inherit";
+        // addClass(ele.uName, "borderRed");
+        // x = "The length of username must be between 3 and 15";
+        // document.getElementById("tips").style.display = "inherit";
+        alert("The length of username must be between 3 and 15");
         return false;
     }
     $.get("checkUserName.action", {"userName": uName}, function (data) {
         let d = $.parseJSON(data);
         console.log(d.success);
         if (d.success !== true) {
-            addClass(ele.uName, "borderRed");
-            x = "Username has already existed";
-            document.getElementById("tips").style.display = "inherit";
+            // addClass(ele.uName, "borderRed");
+            // x = "Username has already existed";
+            // document.getElementById("tips").style.display = "inherit";
+            alert("Username has already existed");
             return true;
         }
     });
@@ -112,32 +109,21 @@ function checkName() {
 }
 
 function checkPass() {
-    let uPass = document.getElementById("password").value;
+    let uPass = document.getElementById("id_password").value;
+    console.info(uPass);
     let urPass = document.getElementById("repeatpassword").value;
     if (uPass === "" || uPass === null) {
-        addClass(ele.uPass, "borderRed");
-        x = "Password can't be empty";
-        document.getElementById("tips").style.display = "inherit";
+        alert("Passwrod can't be empty");
         return false;
     }else if ((uPass !== "") && (uPass != null) && (uPass.length < 6 || uPass.length > 15)) {
-        addClass(ele.uPass, "borderRed");
-        x = "The length of password must be between 6 and 15";
-        document.getElementById("tips").style.display = "inherit";
+        alert("The length of username must be between 6 and 15");
         return false;
     }else if (urPass === "" || urPass === null) {
-        addClass(ele.uPass, "borderRed");
-        x = "Repeat password can't be empty";
-        document.getElementById("tips").style.display = "inherit";
+        alert("Repeat password can't be empty");
         return false;
     }else if ((uPass !== urPass) && (uPass !== "") && (urPass !== "")) {
-        addClass(ele.uPass, "borderRed");
-        addClass(ele.urPass, "borderRed");
-        x = "Inconsistent password entered twice";
-        document.getElementById("tips").style.display = "inherit";
+        alert("Inconsistent password entered twice");
     }else {
-        removeClass(ele.urPass, "borderRed");
-        x = "Registration information submission";
-        document.getElementById("tips").style.display = "inherit";
         return true;
     }
 }
@@ -147,9 +133,7 @@ function checkEmail() {
     let reg = /^[0-9a-zA-Z][_.0-9a-zA-Z-]{0,31}@([0-9a-zA-Z][0-9a-zA-Z-]{0,30}[0-9a-zA-Z]\.){1,4}[a-z]{2,4}$/;
     let regResult = reg.test(uEmail);
     if (!regResult) {
-        addClass(ele.uEmail, "borderRed");
-        x = "Please enter your real Email";
-        document.getElementById("tips").style.display = "inherit";
+        alert("Please enter your real email");
         return false;
     }
     return true;
@@ -161,7 +145,7 @@ function formatTemplate(dta, tmpl) {
             return x;
         }
     };
-    return tmpl.replace(/{(\w+)})/g, function (m1, m2) {
+    return tmpl.replace(/{(\w+)}/g, function (m1, m2) {
         if (!m2) {
             return "";
         }

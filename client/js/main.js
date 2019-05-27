@@ -1,6 +1,8 @@
 /**
  * main.js
  */
+'use strict';
+
 (function() {
 
 	var bodyEl = document.body,
@@ -51,7 +53,7 @@
 			client = docElem['clientHeight'];
 			inner = window['innerHeight'];
 		}
-		
+
 		return client < inner ? inner : client;
 	}
 	function scrollX() { return window.pageXOffset || docElem.scrollLeft; }
@@ -94,7 +96,7 @@
 				if( keyCode === 27 ) {
 					ev.preventDefault();
 					if ("activeElement" in document)
-    					document.activeElement.blur();
+						document.activeElement.blur();
 					hideContent();
 				}
 			}
@@ -103,7 +105,7 @@
 		// hamburger menu button (mobile) and close cross
 		menuCtrl.addEventListener('click', function() {
 			if( !classie.has(sidebarEl, 'sidebar--open') ) {
-				classie.add(sidebarEl, 'sidebar--open');	
+				classie.add(sidebarEl, 'sidebar--open');
 			}
 		});
 
@@ -128,7 +130,7 @@
 
 		// insert it after all the grid items
 		gridItemsContainer.appendChild(dummy);
-		
+
 		// body overlay
 		classie.add(bodyEl, 'view-single');
 
@@ -184,7 +186,7 @@
 				lockScroll = false;
 				window.removeEventListener( 'scroll', noscroll );
 			});
-			
+
 			// reset current
 			current = -1;
 		}, 25);

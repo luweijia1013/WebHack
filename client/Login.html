@@ -5,12 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <!-- script type="text/css" src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script -->
+    <script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
+    <!-- script type="text/css" src="js/bootstrap.min.js"></script -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="js/LogAndSign.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="js/bootstrap.min.js">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <title>Log in</title>
 </head>
@@ -24,10 +28,10 @@
                 <div class="alert alert-warning alert-dismissible" role="alert">
                     <span id="tips">Welcome!</span>
                 </div>
-                <form id="fnLog" action="index.html" method="get" onsubmit="checkLogin()">
-                    <input type="text" class="form-control" name="name" placeholder="User name" />
-                    <input type="text" class="form-control" name="password" placeholder="Password" />
-                    <a href="#"><div class="btn btn-danger" onclick="fnLogin()">Log In</div></a>
+                <form id="fnLog" action="Login.html" method="get" onsubmit="fnLogin()">
+                    <input type="text" class="form-control" name="name" id="id_name" placeholder="User name" />
+                    <input type="text" class="form-control" name="password" id="id_password" placeholder="Password" />
+                    <a ><div class="btn btn-danger" onclick="fnLogin()">Log In</div></a>
                     <a href="#"><p class="text-center">Forget Password</p></a>
                     <hr>
                     <h3 class="text-center">Not a member yet?</h3>

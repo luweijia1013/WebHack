@@ -5,7 +5,7 @@ let querystring = require('querystring');
 let HOST = 'localhost';
 let PORT = 8080;
 
-let username = 'lwja';
+let username = 'lwj';
 let password = 'a987654321';
 http.get({
     'host':'localhost',
@@ -13,9 +13,9 @@ http.get({
     port:8080},function(res){
     res.setEncoding('utf-8');
     res.on('data',function(data){
-        console.log('服务器相应回来的数据为：'+data);
+        console.log(data);
     })
-})
+});
 
 // http.post({
 //
