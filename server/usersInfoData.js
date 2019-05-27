@@ -130,7 +130,7 @@ function insertGeneral(table_name, values){
     })
 }
 
-function insertUsersBasic( userid, username, password, email){
+function insertUsersBasic(userid, username, password, email, callback){
     let table_name = 'usersbasic';
     let attributes = '(username, password, email)';
     let sqlline;
@@ -142,12 +142,16 @@ function insertUsersBasic( userid, username, password, email){
     // sqlline = 'INSERT INTO ' + table_name + attributes + ' VALUES (\'' + username + '\',\'' + password + '\',\'' + email +'\')';
     database_user.run(sqlline, function(err){
         if(err){
-            console.log(err);
-            //TODO: error handle needed here, e.g. UNIQUE constraint failed: usersbasic.username
-            throw err;
+            console.log(err.type);
+            console.log(err.message);
+            // throw err;
+            //existed username
+            //TODO: error type: existed username, but also can be empty username etc.
+            callback(false);
         }
         else{
             console.log('Successfully execute:' + sqlline);
+            callback(true);
         }
     })
 }

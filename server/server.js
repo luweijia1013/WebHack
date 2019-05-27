@@ -64,6 +64,7 @@ function executeUsersinfo(){
 
 // Provide a service to localhost only.
 function start(port) {
+    users_info_data.openUsersInfoDatabase();
     let service = HTTP.createServer(handle);
     try { service.listen(port, 'localhost'); }
     catch (err) { throw err; }
@@ -85,15 +86,22 @@ async function handle(request, response) {
     switch(paras.tag){
         case 'login':
             content = '0';
-            //TODO: database should be 24-open or open-close every time visited
-            users_info_data.openUsersInfoDatabase();
             users_info_data.checkUsersBasicValid((result)=>{
                 if(result){
                     content = '1';
                 }
                 reply(response, content);
             }, paras.username, paras.password);
-            users_info_data.closeUsersInfoDatabase();
+            break;
+        case 'signup':
+            content = '0';
+            users_info_data.insertUsersBasic(-1,'\''+paras.username+'\'','\''+paras.password+'\'','\''+paras.email+'\'',(result)=>{
+                if(result){
+                    content = '1';
+                }
+                reply(response, content);
+            });
+            break;
     }
 }
 
