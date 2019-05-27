@@ -29,12 +29,13 @@ h3 {
     color: white;
 }
 .btn-danger {
+    margin-left: 130px;
     margin-top: 20px;
-    width: 458px;
+    width: 200px;
     font-size: 23px;
     background: #a5e0a8;
-    border:0px;
-    border-radius: 0px;
+    border: 0px;
+    border-radius: 3px;
 }
 
 p {
@@ -56,4 +57,9 @@ p {
     box-shadow: -1px 1px 50px 10px black;
     margin-top: 60px;
     border-radius: 10px 0px 20px 10px;
+}
+
+.alert .alert-warning .alert-dismissible {
+    width: 50px;
+    position: center;
 }

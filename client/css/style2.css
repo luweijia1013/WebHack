@@ -478,13 +478,13 @@ button:focus {
 }
 
 .meta__date,
-.meta__reading-time {
+.meta__rating {
   display: block;
   float: left;
   color: #aaa;
 }
 
-.meta__reading-time {
+.meta__rating {
   text-align: right;
   float: right;
 }
@@ -521,7 +521,7 @@ button:focus {
 
 .meta--preview .meta__avatar,
 .meta--preview .meta__date,
-.meta--preview .meta__reading-time {
+.meta--preview .meta__rating {
   -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
   transition: transform 0.3s, opacity 0.3s;
   -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
@@ -538,14 +538,14 @@ button:focus {
   transition-delay: 0.17s;
 }
 
-.grid__item--loading .meta__reading-time {
+.grid__item--loading .meta__rating {
   -webkit-transition-delay: 0.24s;
   transition-delay: 0.24s;
 }
 
 .grid__item--loading .meta__avatar,
 .grid__item--loading .meta__date,
-.grid__item--loading .meta__reading-time {
+.grid__item--loading .meta__rating {
   -webkit-transform: scale3d(0.5, 0.5, 1);
   transform: scale3d(0.5, 0.5, 1);
   opacity: 0;
@@ -695,7 +695,7 @@ button:focus {
 .meta--full .meta__avatar,
 .meta--full .meta__author,
 .meta--full .meta__date,
-.meta--full .meta__reading-time {
+.meta--full .meta__rating {
   opacity: 0;
 }
 
@@ -712,7 +712,7 @@ button:focus {
 .meta--full .meta__avatar,
 .meta--full .meta__author,
 .meta--full .meta__date,
-.meta--full .meta__reading-time {
+.meta--full .meta__rating {
   -webkit-transform: scale3d(0.5, 0.5, 1);
   transform: scale3d(0.5, 0.5, 1);
 }
@@ -722,7 +722,7 @@ button:focus {
 .content__item--show .meta--full .meta__avatar,
 .content__item--show .meta--full .meta__author,
 .content__item--show .meta--full .meta__date,
-.content__item--show .meta--full .meta__reading-time {
+.content__item--show .meta--full .meta__rating {
   opacity: 1;
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
@@ -753,7 +753,7 @@ button:focus {
   transition-delay: 0.27s;
 }
 
-.content__item--show .meta--full .meta__reading-time {
+.content__item--show .meta--full .meta__rating {
   -webkit-transition-delay: 0.34s;
   transition-delay: 0.34s;
 }
@@ -764,6 +764,11 @@ button:focus {
   transition: opacity 0.5s 0.25s;
 }
 
+.btn-primary {
+  background: white;
+  border:0px;
+  border-radius: 4px;
+}
 /* close button (for content and sidebar) */
 .close-button {
   position: absolute;
@@ -1106,7 +1111,7 @@ body {
 }
 @media screen and (max-width: 899px) {
   .meta--full .meta__date,
-  .meta--full .meta__reading-time {
+  .meta--full .meta__rating {
     float: none;
     text-align: center;
   }

@@ -1,6 +1,8 @@
 // Server which delivers only static HTML pages (no content negotiation).
 // Response codes: see http://en.wikipedia.org/wiki/List_of_HTTP_status_codes
 // When the global data has been initialised, start the server.
+'use strict';
+
 let HTTP = require('http');
 let FS = require('fs').promises;
 let OK = 200, NotFound = 404, BadType = 415;
@@ -9,9 +11,26 @@ let users_info_data = require('./usersInfoData.js');
 start(8080);
 
 
-executeUsersinfo();
+//executeUsersinfo();
 
+let net = require("net");
 
+console.info('Server is running on port 8080');
+
+let server = net.createServer(function (socket) {
+    let client = socket.remoteAddress + ':' + socket.remotePort;
+    console.log('Connected to' + client);
+    socket.on('data', function (data) {
+        console.log(data.toString());
+        socket.write('Hello Client');
+    });
+
+    socket.on('end', function () {
+        console.log('Client disconnected');
+    });
+
+    server.listen(8080, '127.0.0.1');
+});
 
 //execution of usersinfo database
 function executeUsersinfo(){
@@ -71,3 +90,4 @@ function fail(response, code, message) {
     response.write(message);
     response.end();
 }
+

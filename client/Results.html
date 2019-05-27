@@ -1,10 +1,107 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
+    <link rel="stylesheet" type="text/css" href="css/style2.css" />
+    <script src="js/modernizr.custom.js"></script>
+    <script src="js/classie.js"></script>
+    <script src="js/main.js"></script>
+    <title>Search Results</title>
 </head>
+
 <body>
-$END$
+
+<script type="text/template">
+    <a class="grid__item" href="#">
+        <h2 class="title title--preview">{AppName}</h2>
+        <div class="loader"></div>
+        <span class="category">{AppFeature}</span>
+        <div class="meta meta--preview">
+            <img class="meta__avatar" src="" alt="company name" />
+            <span class="meta__date"><i class="fa fa-calendar-o"></i>{UpdateDate}</span>
+            <span class="meta__rating"><i class="fa fa-clock-o"></i>{AppRating}</span>
+        </div>
+    </a>
+</script>
+
+<div class="container">
+    <button id="menu-toggle" class="menu-toggle"><span>Menu</span></button>
+    <div id="theSidebar" class="sidebar">
+        <button class="close-button fa fa-fw fa-close"></button>
+        <h1><span>Search Results</h1>
+        <nav class="codrops-demos">
+            <a class="current-demo" href="Results.html">Google Play Store</a>
+            <a href="Results01.html">App Store</a>
+        </nav>
+    </div>
+    <div id="theGrid" class="main">
+        <section class="grid">
+            <header class="top-bar">
+                <h2 class="top-bar__headline">Latest results</h2>
+                <div class="filter">
+                    <span>Filter by:</span>
+                    <span class="dropdown">Popular</span>
+                </div>
+            </header>
+            <a class="grid__item" href="#">
+
+            </a>
+            <a class="grid__item" href="#">
+                <h2 class="title title--preview">App name</h2>
+                <div class="loader"></div>
+                <span class="category">App feature</span>
+                <div class="meta meta--preview">
+                    <img class="meta__avatar" src="" alt="company name" />
+                    <span class="meta__date"><i class="fa fa-calendar-o"></i>Update date</span>
+                    <span class="meta__rating"><i class="fa fa-clock-o"></i>App rating</span>
+                </div>
+            </a>
+            <a class="grid__item" href="#">
+                <h2 class="title title--preview">App name</h2>
+                <div class="loader"></div>
+                <span class="category">App feature</span>
+                <div class="meta meta--preview">
+                    <img class="meta__avatar" src="" alt="company name" />
+                    <span class="meta__date"><i class="fa fa-calendar-o"></i>Update date</span>
+                    <span class="meta__rating"><i class="fa fa-clock-o"></i>App rating</span>
+                </div>
+            </a>
+            <a class="grid__item" href="#">
+                <h2 class="title title--preview">App name</h2>
+                <div class="loader"></div>
+                <span class="category">App feature</span>
+                <div class="meta meta--preview">
+                    <img class="meta__avatar" src="" alt="company name" />
+                    <span class="meta__date"><i class="fa fa-calendar-o"></i>Update date</span>
+                    <span class="meta__rating"><i class="fa fa-clock-o"></i>App rating</span>
+                </div>
+            </a>
+            <footer class="page-meta">
+                <span>Load more...</span>
+            </footer>
+        </section>
+        <!-- section class="content">
+            <div class="scroll-wrap">
+                <article class="content__item">
+                    <span class="category category--full">App feature</span>
+                    <h2 class="title title--full">App name</h2>
+                    <div class="meta meta--full">
+                        <img class="meta__avatar" src="" alt="company" />
+                        <span class="meta__author">Company name</span>
+                        <span class="meta__date"><i class="fa fa-calendar-o"></i>Update date</span>
+                        <span class="meta__rating"><i class="fa fa-clock-o"></i>App rating</span>
+                    </div>
+                </article>
+            </div>
+            <button class="close-button"><i class="fa fa-close"></i><span>Close</span></button>
+        </section -->
+    </div>
+</div><!-- /container -->
 </body>
 </html>
