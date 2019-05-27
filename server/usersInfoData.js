@@ -61,7 +61,7 @@ function createTable(table_name, attributes, notes){
     });
 }
 
-function getAllUsersBasic(){
+function getAllUsersBasic(callback){
     let table_name = 'usersbasic';
     let sqlline = 'SELECT * FROM ' + table_name;
     database_user.all(sqlline, [], (err,rows)=>{
@@ -71,13 +71,42 @@ function getAllUsersBasic(){
         }
         else{
             console.log('Query All succeed');
-            console.log(rows);
+            // console.log(rows);
             // rows.forEach((row)=>{
             //     console.log(row);
             // });
         }
-        return rows;
-    })
+        callback(rows);
+    });
+}
+
+function checkUsersBasicValid(callback, username, passwd){
+    let table_name = 'usersbasic';
+    let sqlline = 'SELECT * FROM ' + table_name + ' where username = ?';
+    database_user.all(sqlline, [username], (err,rows)=>{
+        if(err){
+            console.log(err.message);
+            throw err;
+        }
+        else{
+            console.log(rows);
+            // console.log(rows);
+            // rows.forEach((row)=>{
+            //     console.log(row);
+            // });
+            if(rows.length != 1){
+                console.error('User Validation Error: Row length not 1')
+            }
+            else{
+                if(passwd === rows[0].password){
+                    callback(true);
+                }
+                else{
+                    callback(false);
+                }
+            }
+        }
+    });
 }
 
 function insertGeneral(table_name, values){
@@ -168,6 +197,7 @@ module.exports = {
     closeUsersInfoDatabase,
     createTable,
     getAllUsersBasic,
+    checkUsersBasicValid,
     insertGeneral,
     insertUsersBasic,
     updateUsersBasic
