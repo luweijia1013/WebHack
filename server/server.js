@@ -74,39 +74,48 @@ function start(port) {
 // Deal with a request.
 async function handle(request, response) {
     console.log('request coming!!');
-    // let url = request.url;
-    // if (url.endsWith("/")) url = url + "index.html";
-    // if (! url.endsWith(".html")) return fail(response, BadType, "Not .html");
-    // let file = "" + url;
-    // let content;
-    // try { content = await FS.readFile(file); }
-    // catch (err) { return fail(response, NotFound, file + " Not found"); }
     let content;
     let paras = parseUrl(request.url);
-    switch(paras.tag){
-        case 'login':
-            content = '0';
-            users_info_data.checkUsersBasicValid((result)=>{
-                if(result){
-                    content = '1';
-                }
-                reply(response, content);
-            }, paras.username, paras.password);
-            break;
-        case 'signup':
-            content = '0';
-            users_info_data.insertUsersBasic(-1,'\''+paras.username+'\'','\''+paras.password+'\'','\''+paras.email+'\'',(result)=>{
-                if(result){
-                    content = '1';
-                }
-                reply(response, content);
-            });
-            break;
+    if(!Object.keys(paras).includes('tag')){
+        //no tag -> page request
+        let url = '../client' + request.url;
+        // console.log(url);
+        if (url.endsWith("/")) url = url + "index.html";
+        if (! url.endsWith(".html")) return fail(response, BadType, "Not .html");
+        let file = "" + url;
+        let content;
+        try { content = await FS.readFile(file); }
+        catch (err) { return fail(response, NotFound, file + " Not found"); }
+    }
+    else {
+        switch (paras.tag) {
+            case 'login':
+                content = '0';
+                users_info_data.checkUsersBasicValid((result) => {
+                    if (result) {
+                        content = '1';
+                    }
+                    reply(response, content);
+                }, paras.username, paras.password);
+                break;
+            case 'signup':
+                content = '0';
+                users_info_data.insertUsersBasic(-1, '\'' + paras.username + '\'', '\'' + paras.password + '\'', '\'' + paras.email + '\'', (result) => {
+                    if (result) {
+                        content = '1';
+                    }
+                    reply(response, content);
+                });
+                break;
+        }
     }
 }
 
 function parseUrl(url){
     // let result = [];
+    if(url.search('\\?') < 0){
+        return {};
+    }
     let paraPart = url.split('?')[1];
     let paras = paraPart.split('&');
     let obj = {};
