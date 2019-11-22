@@ -99,5 +99,5 @@ MONGODB_DOCNAME = 'apkinfo_tt'
 HTTPERROR_ALLOWED_CODES = [301, 302]
 
 #LOG_STDOUT = True
-#LOG_LEVEL = 'ERROR'
-#LOG_FILE = 'Apps.log'
+# LOG_LEVEL = 'INFO'
+LOG_FILE = 'spider.log'

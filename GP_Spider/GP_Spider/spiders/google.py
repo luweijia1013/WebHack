@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 import scrapy
+import logging
 
 from GP_Spider.items import GpItem
 from scrapy import Request
-
 
 class GoogleSpider(scrapy.Spider):
     name = 'google'
@@ -18,11 +18,10 @@ class GoogleSpider(scrapy.Spider):
         link_flag = 0
 
         urls = []
-        for each in keywords:
-            app_url = ("https://play.google.com/store/search?q=" + keywords[link_flag] + '&c=apps')
-            print(app_url)
+        for key in keywords:
+            app_url = ("https://play.google.com/store/search?q=" + key + '&c=apps')
+            # print(app_url)
             yield Request(url=app_url, callback=self.parse_search, dont_filter=True)
-            link_flag += 1
 
     def parse_search(self, response):
         print("START PARSING")
@@ -33,16 +32,12 @@ class GoogleSpider(scrapy.Spider):
         #urls = selector.xpath('//*[@id="fcxH9b"]/div[4]/c-wiz/div/div[2]/div/c-wiz/c-wiz/c-wiz/div/div[2]/div[1]/c-wiz/div/div/div/div/div/a/@href').extract()
 
         print(urls)
+        logging.debug(urls)
 
-        link_flag = 0
-        links = []
-        for link in urls:
-            links.append(link)
 
-        for each in urls:
-            yield Request(url="https://play.google.com" + links[link_flag], callback=self.parse_detail, dont_filter=True)
-            print("https://play.google.com" + links[link_flag])
-            link_flag += 1
+        for app_url in urls:
+            yield Request(url="https://play.google.com" + app_url, callback=self.parse_detail, dont_filter=True)
+            print("https://play.google.com" + app_url)
 
     def parse_detail(self, response):
         item = GpItem()
@@ -54,6 +49,7 @@ class GoogleSpider(scrapy.Spider):
         item['app_description'] = response.xpath('//div[@itemprop="description"]/span/div').xpath('text()').get()
         # item['app_developer'] = response.xpath('//')
         # print(response.text)
+        print(item)
         yield item
 
 
