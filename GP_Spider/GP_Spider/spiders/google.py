@@ -18,17 +18,17 @@ class GoogleSpider(scrapy.Spider):
             print(url)
         yield scrapy.Request(url, self.parse)
 
-    def parse(self, response):
-        keywords = [
-            'stuttering', 'speech%20therapy', 'speech%20and%20language%20therapy', 'aphasia', 'apraxia', 'dysarthria'
-        ]
+    # def parse(self, response):
+    #     keywords = [
+    #         'stuttering', 'speech%20therapy', 'speech%20and%20language%20therapy', 'aphasia', 'apraxia', 'dysarthria'
+    #     ]
 
-        for key in keywords:
-            app_url = ("https://play.google.com/store/search?q=" + key + "&c=apps")
-            print(app_url)
-            yield Request(url=app_url, callback=self.parse_search, dont_filter=True)
+    #     for key in keywords:
+    #         app_url = ("https://play.google.com/store/search?q=" + key + "&c=apps")
+    #         print(app_url)
+    #         yield Request(url=app_url, callback=self.parse_search, dont_filter=True)
 
-
+    #TODO: To be overloaded by different calling type: tag call/ normal call
     def parse(self, response):
         print("START PARSING")
         selector = scrapy.Selector(response)
@@ -40,7 +40,6 @@ class GoogleSpider(scrapy.Spider):
 
         print(urls)
         logging.debug(urls)
-
 
         for app_url in urls:
             yield Request(url="https://play.google.com" + app_url, callback=self.parse_detail, dont_filter=True)
