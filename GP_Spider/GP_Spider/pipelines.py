@@ -6,7 +6,7 @@
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
 import pymongo
-from scrapy import Item
+import logging
 
 
 class GpSpiderPipeline(object):
@@ -20,17 +20,22 @@ class GpSpiderPipeline(object):
         self.client = pymongo.MongoClient(self.DB_URI)
         self.db = self.client[self.DB_NAME]
         self.collection = self.db[spider.settings.get('MONGODB_DOCNAME')]
+        # self.collection.create_index('id', unique=True)
 
     def close_spider(self, spider):
         self.client.close()
 
     def process_item(self, item, spider):
         postItem = dict(item)
-        self.collection.insert_one(postItem)
+        # self.collection.update({'app_id': item['app_id']}, {'$set': dict(item)}, True)
+        # TODO: complex update logic
+        find_app_id = self.collection.find({'app_id':item['app_id']}).pretty()
+        print('FINDAPPID:', find_app_id)
+        if not find_app_id:
+            logging.info('New App_id: %s !' % item['app_id'])
+            self.collection.insert_one(postItem)
+        else:
+            logging.warning('App_id: %s existed!' % item['app_id'])
         return item
 
-    #def insert_db(self, item):
-    #    if isinstance(item, Item):
-    #        item = dict(item)
-    #    self.db.books.insert_one(item)
 

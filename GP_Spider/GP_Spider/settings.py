@@ -56,7 +56,8 @@ DEFAULT_REQUEST_HEADERS = {
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
-    'GP_Spider.middlewares.GpSpiderDownloaderMiddleware': 543,
+    # 'GP_Spider.middlewares.GpSpiderDownloaderMiddleware': 543,
+    'GP_Spider.middlewares.SeleniumDownloaderMiddleware': 543,
 }
 
 # Enable or disable extensions
@@ -69,11 +70,17 @@ DOWNLOADER_MIDDLEWARES = {
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     'GP_Spider.pipelines.GpSpiderPipeline': 300,
+    # 'GP_Spider.redis.pipelines.RedisPipeline': 100,
 }
+# DUPEFILTER_CLASS = "scrapy redis.dupefilter.RFPDupeFilter"
+# SCHEDULER = "scrapy redis.schedule.Scheduler"
+# SCHEDULER_PERSIST = True
+# REDIS_HOST = '127.0.0.1'
+# REDIS_PORT = 6379
 
 MONGODB_URI = 'mongodb://localhost:27017'
 MONGODB_DBNAME = 'scrapy_db'
-MONGODB_DOCNAME = 'apkinfo_tt'
+MONGODB_DOCNAME = 'apkinfo_test'
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
@@ -101,3 +108,4 @@ HTTPERROR_ALLOWED_CODES = [301, 302]
 #LOG_STDOUT = True
 # LOG_LEVEL = 'INFO'
 LOG_FILE = 'spider.log'
+

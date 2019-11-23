@@ -6,6 +6,11 @@
 # https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
+from scrapy.http import HtmlResponse
+import time
+import logging
+from selenium import webdriver
+from selenium.webdriver import ChromeOptions
 
 
 class GpSpiderMiddleware(object):
@@ -55,7 +60,6 @@ class GpSpiderMiddleware(object):
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
 
-
 class GpSpiderDownloaderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the downloader middleware does not modify the
@@ -101,3 +105,39 @@ class GpSpiderDownloaderMiddleware(object):
 
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
+
+class SeleniumDownloaderMiddleware(object):
+    # Not all methods need to be defined. If a method is not defined,
+    # scrapy acts as if the downloader middleware does not modify the
+    # passed objects.
+
+    @classmethod
+    def process_request(self, request, spider):
+        if spider.name == "google":
+            spider.driver.get(request.url)
+            if request.cookies and request.cookies['SingleApp']:
+                logging.info('SingleApp Request: ' + request.url)
+                # gp_spider = GpSpiderDownloaderMiddleware()
+                # return gp_spider.process_request(request, spider)
+                JSLOADING_TIMES = 0
+            else:
+                logging.info('AppSearch Request: ' + request.url)
+                APP_MAX = 1000
+                APP_PER_LOADING = 50
+                JSLOADING_TIMES = APP_MAX // APP_PER_LOADING + 1
+            for x in range(JSLOADING_TIMES):
+                height = 1  # x / 10.0
+                js = "document.documentElement.scrollTop = document.documentElement.scrollHeight * %f" % height
+                spider.driver.execute_script(js)
+                # wait js loading
+                time.sleep(1)
+
+            original_code = spider.driver.page_source
+            res = HtmlResponse(url=request.url, encoding='utf8', body=original_code, request=request)
+            return res
+
+        return None
+
+    def process_response(self, request, response, spider):
+        # print(response.url, response.status)
+        return response
