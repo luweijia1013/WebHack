@@ -29,13 +29,14 @@ class GpSpiderPipeline(object):
         postItem = dict(item)
         # self.collection.update({'app_id': item['app_id']}, {'$set': dict(item)}, True)
         # TODO: complex update logic
-        find_app_id = self.collection.find({'app_id':item['app_id']}).pretty()
-        print('FINDAPPID:', find_app_id)
-        if not find_app_id:
-            logging.info('New App_id: %s !' % item['app_id'])
-            self.collection.insert_one(postItem)
-        else:
-            logging.warning('App_id: %s existed!' % item['app_id'])
+        # find_app_id = self.collection.find({'app_id':item['app_id']}).pretty()
+        # print('FINDAPPID:', find_app_id)
+        # if not find_app_id:
+        #     logging.info('New App_id: %s !' % item['app_id'])
+        self.collection.insert_one(postItem)
+        # self.collection.update({'app_id': item['app_id']}, dict(item), True)
+        # else:
+        #     logging.warning('App_id: %s existed!' % item['app_id'])
         return item
 
 

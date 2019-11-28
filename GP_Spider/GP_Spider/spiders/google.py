@@ -12,7 +12,7 @@ from selenium.webdriver import ChromeOptions
 class GoogleSpider(scrapy.Spider):
     name = 'google'
     allowed_domains = ['google.play.com']
-    start_urls = ['https://play.google.com/store/search?q=stutter&c=apps']
+    start_urls = ['https://play.google.com/store/search?q=articulation&c=apps']
 
     def __init__(self):
         super(GoogleSpider, self).__init__(name='google')
@@ -42,10 +42,10 @@ class GoogleSpider(scrapy.Spider):
     def parse(self, response):
         print("START PARSING")
         selector = scrapy.Selector(response)
-        #print(response.body)
-
-        #urls = selector.xpath('//a[@class="poRVub" and aria-hidden="true"]/@href').extract()
-        #urls = selector.xpath('//*[@id="fcxH9b"]/div[4]/c-wiz/div/div[2]/div/c-wiz/c-wiz/c-wiz/div/div[2]/div[1]/c-wiz/div/div/div/div/div/a/@href').extract()
+        # print(response.body)
+        #
+        # urls = selector.xpath('//a[@class="poRVub" and aria-hidden="true"]/@href').extract()
+        # urls = selector.xpath('//*[@id="fcxH9b"]/div[4]/c-wiz/div/div[2]/div/c-wiz/c-wiz/c-wiz/div/div[2]/div[1]/c-wiz/div/div/div/div/div/a/@href').extract()
 
         urls = selector.xpath('//a[@class="JC71ub"]/@href').extract()
 

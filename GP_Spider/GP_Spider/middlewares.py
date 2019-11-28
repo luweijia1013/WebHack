@@ -106,6 +106,7 @@ class GpSpiderDownloaderMiddleware(object):
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
 
+
 class SeleniumDownloaderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the downloader middleware does not modify the
@@ -131,7 +132,6 @@ class SeleniumDownloaderMiddleware(object):
                 spider.driver.execute_script(js)
                 # wait js loading
                 time.sleep(1)
-
             original_code = spider.driver.page_source
             res = HtmlResponse(url=request.url, encoding='utf8', body=original_code, request=request)
             return res

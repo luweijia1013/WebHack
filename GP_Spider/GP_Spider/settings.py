@@ -80,7 +80,7 @@ ITEM_PIPELINES = {
 
 MONGODB_URI = 'mongodb://localhost:27017'
 MONGODB_DBNAME = 'scrapy_db'
-MONGODB_DOCNAME = 'apkinfo_test'
+MONGODB_DOCNAME = 'apkinfo_tt'
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html

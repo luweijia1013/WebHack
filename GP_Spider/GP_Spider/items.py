@@ -21,4 +21,4 @@ class GpItem(scrapy.Item):
     app_version = scrapy.Field()
     app_date = scrapy.Field()
     app_description = scrapy.Field()
-    #app_price = scrapy.Field()
+    # app_price = scrapy.Field()
