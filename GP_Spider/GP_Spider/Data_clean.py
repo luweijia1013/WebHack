@@ -1,7 +1,6 @@
 from pymongo import MongoClient
 import csv
 
-
 db = MongoClient('localhost', 27017)['scrapy_db']
 collection = db['apkinfo_tt']
 

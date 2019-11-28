@@ -12,7 +12,7 @@ from selenium.webdriver import ChromeOptions
 class GoogleSpider(scrapy.Spider):
     name = 'google'
     allowed_domains = ['google.play.com']
-    start_urls = ['https://play.google.com/store/search?q=articulation&c=apps']
+    start_urls = ['https://play.google.com/store/search?q=parkinson&c=apps']
 
     def __init__(self):
         super(GoogleSpider, self).__init__(name='google')
@@ -54,7 +54,7 @@ class GoogleSpider(scrapy.Spider):
         for app_url in urls:
             yield Request(url="https://play.google.com" + app_url, callback=self.parse_one_app, dont_filter=True, cookies={'SingleApp':True})
             print("https://play.google.com" + app_url)
-        print('COUNTER: ', collections.Counter(self.categories))
+        # print('COUNTER: ', collections.Counter(self.categories))
 
     def parse_one_app(self, response):
         item = GpItem()
